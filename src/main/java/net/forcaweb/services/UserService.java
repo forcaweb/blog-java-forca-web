@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import net.forcaweb.entities.User;
 import net.forcaweb.repositories.UserRepository;
+import net.forcaweb.security.services.BcryptPasswordService;
 
 @Service
 public class UserService {
 	
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private BcryptPasswordService bcryptPasswordService;
 	
 	public List<User> findAll(){
 		return repository.findAll();
@@ -22,6 +26,11 @@ public class UserService {
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		return obj.get();
+	}
+	
+	public User insert(User obj) {
+		obj.setPassword(bcryptPasswordService.encondePass(obj.getPassword()));
+		return repository.save(obj);
 	}
 
 }
