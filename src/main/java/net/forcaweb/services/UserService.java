@@ -8,6 +8,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
 import net.forcaweb.entities.User;
 import net.forcaweb.exceptions.DBExceptions;
 import net.forcaweb.exceptions.ResourceNotFoundException;
@@ -33,8 +34,12 @@ public class UserService {
 	}
 	
 	public User insert(User obj) {
+		try {
 		obj.setPassword(bcryptPasswordService.encondePass(obj.getPassword()));
 		return repository.save(obj);
+		}catch(DataIntegrityViolationException e) {
+			throw new DBExceptions("Prodibido usar mesmo e-mail para várias contas!");
+		}
 	}
 
 	public void delete(Long id) {
@@ -43,8 +48,25 @@ public class UserService {
 		}catch(EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		}catch(DataIntegrityViolationException e) {
-			throw new DBExceptions(e.getMessage());
+			throw new DBExceptions("Proibido deletar uma conta associada a postagens!");
 		}
-		
+	}
+	
+	public User update(User obj, Long id){
+		try {
+			User entity = repository.getReferenceById(id);
+			updateData(obj, entity);
+			return repository.save(entity);
+		}catch(DataIntegrityViolationException e) {
+			throw new DBExceptions("Error ao atualizar essa conta!");
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+	}
+
+	private void updateData(User obj, User entity) {
+		entity.setName(obj.getName());
+		entity.setPhone(obj.getPhone());
+		entity.setBirthDay(obj.getBirthDay());
 	}
 }

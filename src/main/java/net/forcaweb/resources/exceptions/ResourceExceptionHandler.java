@@ -24,7 +24,7 @@ public class ResourceExceptionHandler {
 	
 	@ExceptionHandler(DBExceptions.class)
 	public ResponseEntity<StandardError> database(DBExceptions e, HttpServletRequest request){
-		String error = "Proibido alterar esse ID.";
+		String error = "Solicitação Proibida.";
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI(), error);
 		return ResponseEntity.status(status).body(err);
