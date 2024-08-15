@@ -2,7 +2,9 @@ package net.forcaweb.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import net.forcaweb.entities.enums.RoleUser;
 
 @Entity
 @Table(name = "tb_user")
@@ -24,12 +27,18 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(nullable = false)
 	private String name;
 	@Column(unique = true, nullable = false)
 	private String email;
+	@Column(nullable = true)
 	private String phone;
+	@Column(nullable = true)
 	private LocalDate birthDay;
+	@Column(nullable = false)
 	private String password;
+	
+	private RoleUser roleUser;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "userPosting")
@@ -37,7 +46,7 @@ public class User implements Serializable {
 	
 	public User() {}
 
-	public User(Long id, String name, String email, String phone, LocalDate birthDay, String password) {
+	public User(Long id, String name, String email, String phone, LocalDate birthDay, String password, RoleUser roleUser) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,6 +54,7 @@ public class User implements Serializable {
 		this.phone = phone;
 		this.birthDay = birthDay;
 		this.password = password;
+		this.roleUser = roleUser;
 	}
 
 	public Long getId() {
@@ -97,6 +107,14 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public List<String> getRoleUser() {
+		return Arrays.asList(String.valueOf(roleUser.getCode()), roleUser.getDescription());
+	}
+
+	public void setRoleUser(RoleUser roleUser) {
+		this.roleUser = roleUser;
 	}
 
 	@Override

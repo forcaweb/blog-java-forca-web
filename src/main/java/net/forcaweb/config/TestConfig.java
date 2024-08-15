@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Profile;
 import net.forcaweb.entities.Category;
 import net.forcaweb.entities.Posting;
 import net.forcaweb.entities.User;
+import net.forcaweb.entities.enums.RoleUser;
 import net.forcaweb.repositories.CategoryRepository;
 import net.forcaweb.repositories.PostingRepository;
 import net.forcaweb.repositories.UserRepository;
@@ -45,9 +46,9 @@ public class TestConfig implements CommandLineRunner {
 		
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		
-		User u1 = new User(null, "Diego", "diego@teste.com", "999999999", LocalDate.parse("21/06/1992", fmt), bcryptPasswordService.encondePass("1234567"));
-		User u2 = new User(null, "Thais", "thais@teste.com", "999999999", LocalDate.parse("06/03/1996", fmt), bcryptPasswordService.encondePass("1234567"));
-		User u3 = new User(null, "Nicole", "nicole@teste.com", "999999999", LocalDate.parse("22/01/2002", fmt), bcryptPasswordService.encondePass("1234567"));
+		User u1 = new User(null, "Diego", "diego@teste.com", "999999999", LocalDate.parse("21/06/1992", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.ADMIN);
+		User u2 = new User(null, "Thais", "thais@teste.com", "999999999", LocalDate.parse("06/03/1996", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.MEMBER);
+		User u3 = new User(null, "Nicole", "nicole@teste.com", "999999999", LocalDate.parse("22/01/2002", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.GUEST);
 		
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		
