@@ -52,9 +52,9 @@ public class TestConfig implements CommandLineRunner {
 		
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		
-		Posting p1 = new Posting(null, "Titulo aqui", "Texto aqui!", Instant.now(), u1);
-		Posting p2 = new Posting(null, "Titulo aqui", "Texto aqui!", Instant.now(), u2);
-		Posting p3 = new Posting(null, "Titulo aqui", "Texto aqui!", Instant.now(), u3);
+		Posting p1 = new Posting(null, "Primeiro posté", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper neque vitae metus consectetur, eget hendrerit justo pretium. Vestibulum eget orci sollicitudin, finibus mi at, tempus augue. Nam semper tincidunt porttitor. Sed ut imperdiet nibh. Vestibulum sit amet pretium elit. Donec pulvinar vitae diam et gravida. Donec et justo a tortor convallis consequat. Phasellus sem sem, interdum id sem vel, cursus dapibus urna. Vivamus a enim ut tortor tempor consequat. Etiam ac massa turpis.", Instant.now(), u1);
+		Posting p2 = new Posting(null, "Segundo poste", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper neque vitae metus consectetur, eget hendrerit justo pretium. Vestibulum eget orci sollicitudin, finibus mi at, tempus augue. Nam semper tincidunt porttitor. Sed ut imperdiet nibh. Vestibulum sit amet pretium elit. Donec pulvinar vitae diam et gravida. Donec et justo a tortor convallis consequat. Phasellus sem sem, interdum id sem vel, cursus dapibus urna. Vivamus a enim ut tortor tempor consequat. Etiam ac massa turpis.", Instant.now(), u2);
+		Posting p3 = new Posting(null, "Terceiro poste", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper neque vitae metus consectetur, eget hendrerit justo pretium. Vestibulum eget orci sollicitudin, finibus mi at, tempus augue. Nam semper tincidunt porttitor. Sed ut imperdiet nibh. Vestibulum sit amet pretium elit. Donec pulvinar vitae diam et gravida. Donec et justo a tortor convallis consequat. Phasellus sem sem, interdum id sem vel, cursus dapibus urna. Vivamus a enim ut tortor tempor consequat. Etiam ac massa turpis.", Instant.now(), u3);
 		
 		p1.setCategories(Arrays.asList(cat1));
 		p2.setCategories(Arrays.asList(cat3));

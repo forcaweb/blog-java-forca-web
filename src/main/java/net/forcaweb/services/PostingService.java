@@ -1,7 +1,6 @@
 package net.forcaweb.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,9 @@ public class PostingService {
 		return repository.findAll();
 	}
 	
-	public Posting findById(Long id) {
-		Optional<Posting> obj = repository.findById(id);
-		return obj.get();
+	public Posting findByTitle(String urlIdentify) {
+		Posting obj = repository.findByUrlIdentify(urlIdentify);
+		return obj;
 	}
 
 }

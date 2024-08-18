@@ -1,4 +1,4 @@
-package net.forcaweb.entities;
+package net.forcaweb.dto;
 
 import net.forcaweb.entities.enums.RoleUser;
 

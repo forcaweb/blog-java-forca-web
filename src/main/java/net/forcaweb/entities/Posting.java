@@ -1,16 +1,19 @@
 package net.forcaweb.entities;
 
+import java.text.Normalizer;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -23,8 +26,12 @@ public class Posting {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String title;
+	@Lob
+    @Column 
 	private String textPost;
 	private Instant moment;
+	@Column(unique = true)
+	private String urlIdentify;
 
 	@ManyToOne
 	@JoinColumn(name = "user_post_id")
@@ -44,7 +51,9 @@ public class Posting {
 		this.textPost = textPost;
 		this.moment = moment;
 		this.userPosting = userPosting;
+		this.urlIdentify = this.getUrlIdentify();
 	}
+
 
 	public Long getId() {
 		return id;
@@ -92,6 +101,16 @@ public class Posting {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+	
+	
+	public String getUrlIdentify() {
+		urlIdentify = removerAcentos(this.title);
+		return urlIdentify.replace(" ", "-").toLowerCase();
+	}
+	
+	public static String removerAcentos(String str) {
+	    return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
 	}
 
 	@Override

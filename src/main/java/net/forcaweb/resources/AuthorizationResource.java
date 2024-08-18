@@ -1,9 +1,6 @@
 package net.forcaweb.resources;
 
-import javax.security.sasl.AuthenticationException;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import net.forcaweb.config.security.TokenService;
-import net.forcaweb.entities.AuthenticationDTO;
-import net.forcaweb.entities.LoginDTO;
-import net.forcaweb.entities.RegisterDTO;
+import net.forcaweb.dto.AuthenticationDTO;
+import net.forcaweb.dto.LoginDTO;
+import net.forcaweb.dto.RegisterDTO;
 import net.forcaweb.entities.User;
 import net.forcaweb.entities.enums.RoleUser;
 import net.forcaweb.repositories.UserRepository;

@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import net.forcaweb.exceptions.DBExceptions;
 import net.forcaweb.exceptions.ResourceErrorInternalServerException;
 import net.forcaweb.exceptions.ResourceNotFoundException;
+import net.forcaweb.exceptions.TokenExpiredExceptions;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -34,6 +35,14 @@ public class ResourceExceptionHandler {
 	public ResponseEntity<StandardError> erroServer(ResourceErrorInternalServerException e, HttpServletRequest request){
 		String error = "Algum problema foi encontrado no servidor. Não se preocupe, um de nossos especialistas vai corrigir!";
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI(), error);
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(TokenExpiredExceptions.class)
+	public ResponseEntity<StandardError> tokenExpired(TokenExpiredExceptions e, HttpServletRequest request){
+		String error = "Token Expirado.";
+		HttpStatus status = HttpStatus.UNAUTHORIZED;
 		StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI(), error);
 		return ResponseEntity.status(status).body(err);
 	}
