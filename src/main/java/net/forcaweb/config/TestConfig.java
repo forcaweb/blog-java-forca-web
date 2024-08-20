@@ -48,7 +48,7 @@ public class TestConfig implements CommandLineRunner {
 		
 		User u1 = new User(null, "Diego", "diego@teste.com", "999999999", LocalDate.parse("21/06/1992", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.ADMIN);
 		User u2 = new User(null, "Thais", "thais@teste.com", "999999999", LocalDate.parse("06/03/1996", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.MEMBER);
-		User u3 = new User(null, "Nicole", "nicole@teste.com", "999999999", LocalDate.parse("22/01/2002", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.GUEST);
+		User u3 = new User(null, "Nicole", "nicole@teste.com", "999999999", LocalDate.parse("22/01/2002", fmt), bcryptPasswordService.encondePass("1234567"), RoleUser.MEMBER);
 		
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
 		

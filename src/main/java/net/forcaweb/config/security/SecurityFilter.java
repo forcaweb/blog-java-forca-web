@@ -26,10 +26,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
-	private static final String[] PUBLIC_MATCHERS = {
-			"/postings/**"
-	 };
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

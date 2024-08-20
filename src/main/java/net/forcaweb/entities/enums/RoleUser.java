@@ -3,8 +3,7 @@ package net.forcaweb.entities.enums;
 public enum RoleUser {
 
 	ADMIN(1, "Administrador"),
-	MEMBER(2, "Membro"),
-	GUEST(3, "Visitante");
+	MEMBER(2, "Membro");
 	
 	private int code;
 	private String description;

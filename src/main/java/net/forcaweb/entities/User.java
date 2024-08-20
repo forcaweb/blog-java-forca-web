@@ -47,6 +47,7 @@ public class User implements UserDetails, Serializable {
 	@Column(nullable = true)
 	private LocalDate birthDay;
 
+	@JsonIgnore
 	@Column(nullable = false)
 	private String password;
 
