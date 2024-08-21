@@ -9,6 +9,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import net.forcaweb.config.security.TokenService;
 import net.forcaweb.entities.User;
 import net.forcaweb.exceptions.DBExceptions;
 import net.forcaweb.exceptions.ResourceNotFoundException;
@@ -24,6 +25,9 @@ public class UserService {
 	@Autowired
 	private BcryptPasswordService bcryptPasswordService;
 	
+	@Autowired
+	private TokenService jwUtil;
+	
 	public List<User> findAll(){
 		return repository.findAll();
 	}
@@ -31,6 +35,11 @@ public class UserService {
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
 		return obj.orElseThrow(()-> new ResourceNotFoundException(id));
+	}
+	
+	public String findByToken(String token){
+		String obj = jwUtil.extractUsername(token);
+		return obj;
 	}
 	
 	public User insert(User obj) {

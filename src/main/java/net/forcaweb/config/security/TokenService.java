@@ -47,4 +47,17 @@ public class TokenService {
 			return "";
 		}
 	}
+
+	public String extractUsername(String token) {
+		try {
+			Algorithm algorithm = Algorithm.HMAC256(secret);
+			return JWT.require(algorithm)
+					.withIssuer("blog-backend-fw")
+					.build()
+					.verify(token)
+					.getSubject();
+		}catch(JWTCreationException exception) {
+			return "";
+		}
+	}
 }
